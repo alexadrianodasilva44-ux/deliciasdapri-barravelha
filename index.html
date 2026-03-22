@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delícias da Pri | Confeitaria Artesanal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1 class="logo">Delícias da <span>Pri</span></h1>
+            <nav>
+                <ul>
+                    <li><a href="#bolos">Bolos</a></li>
+                    <li><a href="#doces">Doces</a></li>
+                    <li><a href="#localizacao">Onde Estamos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-inicio">
+        <div class="container">
+            <div class="hero-card">
+                <img src="img/logo.webp" alt="Logo Pri" class="logo-central">
+                <h2>Adoçando seus momentos especiais ❤️</h2>
+                <p>Confeitaria Artesanal em Barra Velha - SC</p>
+                <a href="#bolos" class="btn-ver-cardapio">Explorar Cardápio</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="bolos" class="secao-produtos">
+            <h3 class="titulo-categoria">🎂 Nossos Bolos</h3>
+            <div id="grid-bolos" class="grid-galeria"></div>
+        </section>
+
+        <section id="doces" class="secao-produtos">
+            <h3 class="titulo-categoria">🍬 Doces & Brigadeiros</h3>
+            <div id="grid-doces" class="grid-galeria"></div>
+        </section>
+        
+        <section id="localizacao" class="secao-endereco">
+            <div class="card-endereco">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Nossa Localização</h3>
+                <p>Rua Nair Borba Maia, 636 - Casa 4</p>
+                <p>Vila Nova, Barra Velha - SC</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=Rua+Nair+Borba+Maia+636+Barra+Velha" target="_blank" class="btn-mapa">Ver no Google Maps</a>
+            </div>
+        </section>
+    </main>
+
+    <a href="https://wa.me/5547991443644" class="btn-float-whats" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        const numeroWhats = "5547991443644";
+        
+        // Ajuste para o GitHub Pages: Pega o link real da imagem no servidor
+        function obterLinkImagem(nome) {
+            const imgElement = new Image();
+            imgElement.src = `img/${nome}.webp`;
+            return imgElement.src; 
+        }
+
+        function criarItem(nome, containerId) {
+            const container = document.getElementById(containerId);
+            const urlImagemReal = obterLinkImagem(nome);
+            
+            // Mensagem do WhatsApp com o link direto da foto para gerar prévia
+            const mensagem = `Olá Pri! Gostaria de encomendar este produto: ${urlImagemReal}`;
+            const urlWhats = `https://wa.me/${numeroWhats}?text=${encodeURIComponent(mensagem)}`;
+
+            const item = document.createElement('div');
+            item.className = 'item';
+            item.innerHTML = `
+                <a href="${urlWhats}" target="_blank">
+                    <div class="img-container">
+                        <img src="img/${nome}.webp" alt="${nome}" loading="lazy" onerror="this.style.display='none'">
+                        <div class="overlay">
+                            <span class="btn-encomendar">Encomendar</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-tag">Artesanal</span>
+                        <p>Toque para pedir</p>
+                    </div>
+                </a>
+            `;
+            container.appendChild(item);
+        }
+
+        // Listas de Imagens - IMPORTANTE: Deixe os nomes exatamente como nos arquivos
+        const bolos = ['aranha', 'image 1', 'image 2', 'image 3', 'image 4', 'image 5', 'image 6', 'image 8', 'image 9', 'image 10', 'image 11', 'image 12', 'image 13', 'image 14', 'image 17', 'image 18'];
+        bolos.forEach(b => criarItem(b, 'grid-bolos'));
+
+        const doces = ['image 7', 'image 15', 'image 16']; 
+        doces.forEach(d => criarItem(d, 'grid-doces'));
+    </script>
+
+    <footer>
+        <p>Delícias da Pri © 2026 | Barra Velha - SC</p>
+    </footer>
+
+</body>
+</html>
